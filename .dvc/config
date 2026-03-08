@@ -1,4 +1,6 @@
 [core]
-    remote = localremote
+    remote = my_local_vault
 ['remote "localremote"']
     url = /tmp/lexguard_dvc_vault
+['remote "my_local_vault"']
+    url = /Users/oliversouc/lexguard_dvc_vault
