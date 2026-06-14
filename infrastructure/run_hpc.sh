@@ -10,7 +10,7 @@ module purge
 module load Python/3.12.3
 module load CUDA/12.1.1
 
-cd /home/osou/projects/lexguard-mlops || exit 1
+cd "$SLURM_SUBMIT_DIR" || exit 1
 
 source .venv/bin/activate
 

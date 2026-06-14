@@ -70,8 +70,6 @@ def run_ingestion():
 
     if torch.cuda.is_available():
         device = "cuda"
-    # elif torch.backends.mps.is_available():
-    #     device = "mps"
     else:
         device = "cpu"
 
@@ -138,7 +136,6 @@ def run_ingestion():
     duration = end_time - start_time
     print(f"✨ SUCCESS: Vector DB saved to {VECTORSTORE_DIR} in {duration:.2f} seconds.")
 
-    # Format pipeline metrics payload
     metrics_payload = {
         "model": EMBEDDING_MODEL_NAME,
         "chunk_size": CHUNK_SIZE,
@@ -149,7 +146,6 @@ def run_ingestion():
         "execution_time_seconds": round(duration, 2)
     }
 
-    # Maintain local JSON sidecar backup for safety
     with open(EMBEDDING_METRICS_PATH, "w") as f:
         json.dump(metrics_payload, f, indent=4)
     print(f"✅ Metrics sidecar saved to {EMBEDDING_METRICS_PATH}")

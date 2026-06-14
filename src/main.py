@@ -8,7 +8,6 @@ mlflow.langchain.autolog()
 
 
 def chat():
-    """Interactive terminal loop for testing the Agentic workflow."""
     print("\n" + "=" * 60)
     print("🏛️ Welcome to LexGuard - Agentic AI Compliance")
     print(f"🧠 Model Active: {RESEARCHER_MODEL_NAME.split('/')[-1]}")

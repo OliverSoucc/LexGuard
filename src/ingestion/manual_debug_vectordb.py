@@ -6,8 +6,6 @@ from src.config import EMBEDDING_MODEL_NAME, VECTORSTORE_DIR
 
 class QueryAgent:
     def __init__(self, model_name=EMBEDDING_MODEL_NAME):
-        """Initializes the embedding model and connects to the vector database."""
-
         self.persist_directory = VECTORSTORE_DIR
 
         if not VECTORSTORE_DIR.exists():
@@ -29,7 +27,6 @@ class QueryAgent:
         print(f"✅ Database loaded. Total chunks: {self.vector_db._collection.count()}")
 
     def answer_question(self, query: str, k: int = 3):
-        """Searches the database for the most relevant legal sections."""
         formatted_query = f"query: {query}"
         results = self.vector_db.similarity_search_with_score(formatted_query, k=k)
         return results

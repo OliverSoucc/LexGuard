@@ -44,7 +44,6 @@ class ResearcherNode:
 
     @property
     def vector_db(self):
-        """Lazily initialize ChromaDB and Embeddings only when first requested."""
         if self._vector_db is None:
             print("💾 [Initialization] Loading heavy Chroma Vector DB into memory...")
             device = "cuda" if torch.cuda.is_available() else "cpu"

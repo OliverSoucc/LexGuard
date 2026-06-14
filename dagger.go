@@ -39,7 +39,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	// 🛡️ MLflow Network Bridge Configuration
 	mlflowURI := os.Getenv("MLFLOW_TRACKING_URI")
 	if mlflowURI == "" {
 		mlflowURI = "http://host.docker.internal:5000"
@@ -49,7 +48,6 @@ func main() {
 		fmt.Printf("🔄 [Network Bridge] Patched local MLflow URI tracking endpoint to: %s\n", mlflowURI)
 	}
 
-	// --- SOURCE ---
 	src := client.Host().Directory(".", dagger.HostDirectoryOpts{
 		Exclude: []string{
 			".git",
@@ -80,7 +78,6 @@ func main() {
 		WithEnvVariable("MLFLOW_TRACKING_URI", mlflowURI).
 		WithSecretVariable("TOGETHER_API_KEY", secret)
 
-	// --- ROUTING ---
 	switch mode {
 	case "quick":
 		fmt.Println("🚀 Running QUICK pipeline...")
@@ -104,7 +101,6 @@ func main() {
 }
 
 func runPipeline(ctx context.Context, base *dagger.Container, evalSet string, runName string) error {
-	// 🛡️ Sequentially run Pytest, then execute the MLflow Evaluation Script
 	container := ensureVectorstore(base).
 		WithExec([]string{
 			"sh", "-lc",
@@ -129,7 +125,6 @@ func runPipeline(ctx context.Context, base *dagger.Container, evalSet string, ru
 }
 
 func ensureVectorstore(base *dagger.Container) *dagger.Container {
-	// 🛡️ Dynamic DVC Vault Loader
 	cmd := `
 if [ -d "` + vectorstoreDir + `" ] && [ "$(ls -A ` + vectorstoreDir + ` 2>/dev/null)" ]; then
   echo "✅ Vectorstore exists. Skipping DVC pull."
