@@ -1,0 +1,25 @@
+# Git and DVC
+.git
+.gitignore
+.dvc
+.dvcignore
+
+# Python Virtual Environments & Cache
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+
+# MLflow Tracking (Keep local logs out of the container)
+mlruns/
+mlartifacts/
+mlflow.db
+
+# Heavy Data (We will let Dagger/DVC handle injecting the data later)
+data/vectorstore/
+data/interim/
+*.pdf
+
+# Environment variables
+.env

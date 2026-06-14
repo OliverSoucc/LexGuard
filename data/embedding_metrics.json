@@ -1,0 +1,9 @@
+{
+    "model": "intfloat/multilingual-e5-large",
+    "chunk_size": 1024,
+    "overlap": 200,
+    "device": "cpu",
+    "source_format": "JSON/Markdown",
+    "total_chunks": 1962,
+    "execution_time_seconds": 1461.45
+}

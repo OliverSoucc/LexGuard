@@ -1,16 +1,16 @@
-from pathlib import Path
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 
+from src.config import EMBEDDING_MODEL_NAME, VECTORSTORE_DIR
+
 
 class QueryAgent:
-    def __init__(self, model_name="intfloat/multilingual-e5-large"):
+    def __init__(self, model_name=EMBEDDING_MODEL_NAME):
         """Initializes the embedding model and connects to the vector database."""
 
-        ROOT = Path(__file__).resolve().parent.parent.parent
-        self.persist_directory = str(ROOT / "data" / "vectorstore")
+        self.persist_directory = VECTORSTORE_DIR
 
-        if not (ROOT / "data" / "vectorstore").exists():
+        if not VECTORSTORE_DIR.exists():
             print(f"❌ ERROR: Cannot find vectorstore at {self.persist_directory}")
             print("Did the rsync from the HPC fail?")
             return
@@ -38,7 +38,6 @@ class QueryAgent:
 if __name__ == "__main__":
     agent = QueryAgent()
 
-    # If the DB didn't load, stop here
     if not hasattr(agent, 'vector_db'):
         exit(1)
 

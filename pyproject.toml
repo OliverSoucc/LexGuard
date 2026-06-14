@@ -1,0 +1,142 @@
+# https://docs.astral.sh/uv/reference/settings/
+# https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+
+# PROJECT
+
+[project]
+name = "lexguard-mlops"
+version = "0.1.0"
+description = "Agentic AI for Automated Slovak & EU AI Act Compliance."
+authors = [{ name = "OliverSoucc" }]
+readme = "README.md"
+license = { file = "LICENSE.txt" }
+keywords = ["mlops", "python", "package"]
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "dvc>=3.66.1",
+    "hatchling>=1.27.0",
+    "langchain-community>=0.3.21",
+    "mlflow>=2.20.3",
+    "numpy<2",
+    "pandas>=2.3.3",
+    "pypdf>=6.6.2",
+    "langchain-huggingface",
+    "torch==2.2.2; sys_platform == 'darwin' and platform_machine == 'x86_64'",
+    "torch>=2.4,<2.6; sys_platform != 'darwin' or platform_machine != 'x86_64'",
+    "torchvision==0.17.2; sys_platform == 'darwin' and platform_machine == 'x86_64'",
+    "torchvision>=0.19,<0.21; sys_platform != 'darwin' or platform_machine != 'x86_64'",
+    "pymupdf>=1.26.7",
+    "sentence-transformers>=5.2.2",
+    "onnxruntime<1.19.0",
+    "chromadb>=1.4.1",
+    "langchain-chroma>=1.1.0",
+    "langchain-text-splitters>=1.1.0",
+    "pymupdf4llm>=0.2.9",
+    "ftfy>=6.3.1",
+    "python-dotenv>=1.2.1",
+    "langchain-openai>=1.1.10",
+    "langgraph>=1.1.0",
+    "transformers>=4.41,<4.45",
+    "langchain>=1.2.15",
+    "easyocr>=1.7.2",
+]
+
+# LINKS
+
+[project.urls]
+Homepage = "https://github.com/OliverSoucc/lexguard-mlops"
+Documentation = "https://OliverSoucc.github.io/lexguard-mlops/"
+Repository = "https://github.com/OliverSoucc/lexguard-mlopse"
+"Bug Tracker" = "https://github.com/OliverSoucc/lexguard-mlops/issues"
+Changelog = "https://github.com/OliverSoucc/lexguard-mlops/blob/main/CHANGELOG.md"
+
+# SCRIPTS
+
+[project.scripts]
+lexguard-mlops = "lexguard_mlops.scripts:main"
+lex-ingest = "lexguard_mlops.ingestion.embed:run_ingestion"
+lex-ui = "mlflow.cli:cli"
+
+# DEPENDENCIES
+
+[dependency-groups]
+check = [
+    "bandit>=1.8.3",
+    "coverage>=7.6.12",
+    "mypy>=1.15.0",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.0.0",
+    "pytest-mock>=3.14.0",
+    "pytest-xdist>=3.6.1",
+    "ruff>=0.9.9",
+]
+commit = ["commitizen>=4.4.1", "pre-commit>=4.1.0"]
+dev = ["rust-just>=1.39.0"]
+doc = ["pdoc>=15.0.1"]
+notebook = ["ipykernel>=6.29.5", "nbformat>=5.10.4"]
+
+# TOOLS
+
+[tool.uv]
+default-groups = ["check", "commit", "dev", "doc", "notebook"]
+
+[tool.bandit]
+targets = ["src"]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "pep440"
+version_provider = "pep621"
+update_changelog_on_bump = true
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+omit = ["__main__.py"]
+
+[tool.mypy]
+pretty = true
+python_version = "3.13"
+check_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "--verbosity=2"
+pythonpath = ["src"]
+
+[tool.ruff]
+fix = true
+indent-width = 4
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["D100", "D103"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+# SYSTEMS
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+torchaudio = { index = "pytorch-cpu" }
+

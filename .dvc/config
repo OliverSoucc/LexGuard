@@ -1,6 +1,9 @@
 [core]
-    remote = my_local_vault
+    remote = storage
 ['remote "localremote"']
     url = /tmp/lexguard_dvc_vault
 ['remote "my_local_vault"']
     url = /Users/oliversouc/lexguard_dvc_vault
+['remote "storage"']
+    url = s3://lexguard-dvc/lexguard-mlops
+    endpointurl = https://5d62ef62cc151e4aaeace83c3bfd5ebd.r2.cloudflarestorage.com

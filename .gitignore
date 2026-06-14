@@ -1,40 +1,40 @@
 # https://git-scm.com/docs/gitignore
 
-# Build
-/dist/
-/build/
+# Build & Compilation
+dist/
+build/
+*.egg-info/
 
-# Cache
+# Cache & Testing Runtime
 .cache/
 .coverage*
 .mypy_cache/
 .ruff_cache/
 .pytest_cache/
-
-# Editor
-/.idea/
-/.vscode/
-.ipynb_checkpoints/
-
-# Environs
-.env
-/.venv/
-
-# Project
-/docs/*
-/mlruns/*
-/outputs/*
-!**/.gitkeep
-
-# Python
-*.py[cod]
 __pycache__/
+*.py[cod]
 
-.venv/
-data/
-mlruns/
-*.log
+# IDEs & Editor Configurations
+.idea/
+.vscode/
 .DS_Store
+*.log
+
+# Environment & Private Keys
+.env
+.venv/
+
+# MLOps Infrastructure & Databases
+mlflow.db
+mlruns/
+mlartifacts/
 infrastructure/
-/raw
-/data
+
+# Project Data Layers (Managed via DVC)
+data/raw/
+data/interim/
+data/vectorstore/
+outputs/
+
+# Keep empty directory tracking active where needed
+!**/.gitkeep
