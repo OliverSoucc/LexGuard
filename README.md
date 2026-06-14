@@ -1,7 +1,6 @@
 # 🏛️ LegGuard: Multi-Agent AI Regulatory Compliance Pipeline
 
 ![Build Status](https://img.shields.io/badge/Dagger_Pipeline-Passing-brightgreen)
-![Tests](https://img.shields.io/badge/Pytest-100%25_Coverage-success)
 ![Orchestration](https://img.shields.io/badge/Agents-LangGraph-orange)
 ![Telemetry](https://img.shields.io/badge/Tracking-MLflow-blue)
 ![Storage](https://img.shields.io/badge/DVC-Cloudflare_R2-yellow)
